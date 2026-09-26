@@ -1,0 +1,121 @@
+.classification-image-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+  justify-content: center;
+}
+
+.class-img-card {
+  text-align: center;
+  flex: 1;
+  max-width: 280px;
+}
+
+.class-img-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+.class-img-card span {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.classification-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.class-card {
+  background: var(--dark-light);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.class-card:hover {
+  transform: translateY(-3px);
+}
+
+.class-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  border-left: 4px solid;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.class-card-header h4 {
+  font-size: 1rem;
+  flex: 1;
+}
+
+.risk-badge {
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+.class-card-body {
+  padding: 15px 20px;
+}
+
+.class-detail {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 0.88rem;
+  align-items: flex-start;
+}
+
+.class-label {
+  font-weight: 600;
+  color: var(--primary-light);
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.class-tag {
+  background: rgba(41, 128, 185, 0.2);
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  border: 1px solid rgba(41, 128, 185, 0.3);
+}
+
+.classification-note {
+  text-align: center;
+}
+
+.classification-note blockquote {
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid var(--accent);
+  padding: 25px 30px;
+  border-radius: 0 12px 12px 0;
+  font-style: italic;
+  font-size: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+@media (max-width: 968px) {
+  .classification-cards {
+    grid-template-columns: 1fr;
+  }
+  .classification-image-row {
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -1,0 +1,87 @@
+.conclusions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  margin-bottom: 50px;
+}
+
+.conclusion-card {
+  background: var(--dark-light);
+  border-radius: 16px;
+  padding: 35px;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.conclusion-card:hover {
+  transform: translateY(-5px);
+}
+
+.conclusion-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: rgba(41, 128, 185, 0.2);
+  position: absolute;
+  top: 15px;
+  right: 25px;
+}
+
+.conclusion-card h4 {
+  color: var(--primary-light);
+  margin-bottom: 12px;
+  font-size: 1.15rem;
+}
+
+.conclusion-card p {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  opacity: 0.85;
+}
+
+.recommendations-box {
+  background: var(--dark-light);
+  border-radius: 16px;
+  padding: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.recommendations-box h3 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1.3rem;
+}
+
+.recommendation-timeline {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 22px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.timeline-item:last-child {
+  border-bottom: none;
+}
+
+.timeline-marker {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.timeline-content {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 968px) {
+  .conclusions-grid {
+    grid-template-columns: 1fr;
+  }
+}

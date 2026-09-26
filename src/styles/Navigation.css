@@ -1,0 +1,55 @@
+.navigation {
+  background: var(--dark);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.nav-items {
+  display: flex;
+  overflow-x: auto;
+  gap: 5px;
+  padding: 10px 0;
+  scrollbar-width: thin;
+}
+
+.nav-items::-webkit-scrollbar {
+  height: 4px;
+}
+
+.nav-items::-webkit-scrollbar-thumb {
+  background: var(--primary-light);
+  border-radius: 2px;
+}
+
+.nav-btn {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.nav-btn.active {
+  background: var(--primary-light);
+  color: white;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .nav-btn {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+}

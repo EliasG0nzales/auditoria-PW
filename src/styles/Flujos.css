@@ -1,0 +1,189 @@
+.diagram-container {
+  background: var(--dark-light);
+  border-radius: 16px;
+  padding: 40px;
+  margin-bottom: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.diagram-title {
+  text-align: center;
+  font-size: 1.3rem;
+  margin-bottom: 35px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.flow-diagram {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.flow-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.flow-node {
+  padding: 16px 22px;
+  border-radius: 12px;
+  text-align: center;
+  min-width: 180px;
+  max-width: 250px;
+  font-size: 0.88rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  line-height: 1.4;
+}
+
+.flow-emoji {
+  font-size: 1.5rem;
+}
+
+.flow-start {
+  background: rgba(41, 128, 185, 0.2);
+  border: 2px solid #2980b9;
+}
+
+.flow-process {
+  background: rgba(39, 174, 96, 0.15);
+  border: 2px solid #27ae60;
+}
+
+.flow-decision {
+  background: rgba(243, 156, 18, 0.15);
+  border: 2px solid #f39c12;
+}
+
+.flow-warning {
+  background: rgba(231, 76, 60, 0.15);
+  border: 2px solid #e74c3c;
+}
+
+.flow-end {
+  background: rgba(155, 89, 182, 0.15);
+  border: 2px solid #9b59b6;
+}
+
+.flow-node.small {
+  min-width: 150px;
+  padding: 12px 16px;
+  font-size: 0.8rem;
+}
+
+.flow-arrow {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+}
+
+.flow-connector {
+  text-align: center;
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 10px 0;
+}
+
+.flow-branch {
+  display: flex;
+  gap: 40px;
+}
+
+.flow-branch-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.branch-label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 4px 16px;
+  border-radius: 20px;
+}
+
+.branch-label.yes {
+  color: #27ae60;
+  background: rgba(39, 174, 96, 0.15);
+}
+
+.branch-label.no {
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.15);
+}
+
+/* ARQUITECTURA */
+.architecture-diagram {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.arch-layer {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 5px;
+}
+
+.arch-layer-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.arch-components {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.arch-component {
+  background: rgba(41, 128, 185, 0.1);
+  border: 1px solid rgba(41, 128, 185, 0.2);
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  flex: 1;
+  min-width: 200px;
+  text-align: center;
+}
+
+.arch-component.highlight-comp {
+  background: rgba(39, 174, 96, 0.15);
+  border-color: rgba(39, 174, 96, 0.3);
+  font-weight: 600;
+}
+
+.arch-arrow {
+  text-align: center;
+  font-size: 1.3rem;
+  padding: 5px 0;
+  opacity: 0.5;
+}
+
+@media (max-width: 968px) {
+  .flow-row {
+    flex-direction: column;
+  }
+  .flow-arrow {
+    transform: rotate(90deg);
+  }
+  .flow-branch {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .arch-components {
+    flex-direction: column;
+  }
+  .diagram-container {
+    padding: 20px;
+  }
+}
