@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   FaCircleCheck,
   FaDisplay,
@@ -16,6 +16,28 @@ import {
 import '../styles/Soluciones.css';
 
 const Soluciones = () => {
+  useEffect(() => {
+    const videos = document.querySelectorAll('.solution-autoplay-video');
+
+    if (!('IntersectionObserver' in window)) {
+      videos.forEach((video) => video.play().catch(() => {}));
+      return () => videos.forEach((video) => video.pause());
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.play().catch(() => {});
+        } else {
+          entry.target.pause();
+        }
+      });
+    }, { threshold: 0.4 });
+
+    videos.forEach((video) => observer.observe(video));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="section">
       <div className="container">
@@ -36,12 +58,12 @@ const Soluciones = () => {
             <h3>Mecanismo de Consentimiento Informado para IA</h3>
           </div>
           <div className="solution-content-grid">
-            <div className="solution-image-side">
-              <img
-                src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600"
-                alt="Consentimiento informado"
-              />
-            </div>
+            <figure className="solution-video-side">
+              <video className="solution-autoplay-video" muted loop preload="metadata" playsInline aria-label="Mecanismo de Consentimiento Informado para IA">
+                <source src="/Mecanismo%20de%20Consentimiento%20Informado%20para%20IA.mp4" type="video/mp4" />
+                Tu navegador no puede reproducir este video.
+              </video>
+            </figure>
             <div className="solution-text-side">
               <h4>
                 <span className="section-icon">
@@ -200,12 +222,12 @@ const Soluciones = () => {
                 </div>
               </div>
             </div>
-            <div className="solution-image-side">
-              <img
-                src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600"
-                alt="Machine Learning Pipeline"
-              />
-            </div>
+            <figure className="solution-video-side">
+              <video className="solution-autoplay-video" muted loop preload="metadata" playsInline aria-label="Estrategia de Retención y Eliminación en Modelos de ML">
+                <source src="/Estrategia%20de%20Retenci%C3%B3n%20y%20Eliminaci%C3%B3n%20en%20Modelos%20de%20ML.mp4" type="video/mp4" />
+                Tu navegador no puede reproducir este video.
+              </video>
+            </figure>
           </div>
         </div>
 
@@ -216,73 +238,89 @@ const Soluciones = () => {
             <h3>Plan de Mitigación de Accesos no Autorizados</h3>
           </div>
           <div className="security-grid">
-            <div className="security-card">
-              <img
-                src="https://images.unsplash.com/photo-1563206767-5b18f218e8de?w=400"
-                alt="Cifrado"
-              />
-              <h4>
-                <span className="section-icon">
-                  <FaShieldHalved />
-                </span>
-                Cifrado
-              </h4>
-              <ul>
-                <li>TLS 1.3 para datos en tránsito</li>
-                <li>AES-256 para datos en reposo</li>
-                <li>Cifrado de campo para datos sensibles</li>
-              </ul>
+            <div className="security-card" tabIndex="0">
+              <figure className="security-video">
+                <video className="solution-autoplay-video" muted loop preload="metadata" playsInline aria-label="Cifrado">
+                  <source src="/cifrado.mp4" type="video/mp4" />
+                  Tu navegador no puede reproducir este video.
+                </video>
+              </figure>
+              <div className="security-card-content">
+                <h4>
+                  <span className="section-icon">
+                    <FaShieldHalved />
+                  </span>
+                  Cifrado
+                </h4>
+                <ul>
+                  <li>TLS 1.3 para datos en tránsito</li>
+                  <li>AES-256 para datos en reposo</li>
+                  <li>Cifrado de campo para datos sensibles</li>
+                </ul>
+              </div>
             </div>
-            <div className="security-card">
-              <img
-                src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=400"
-                alt="Hashing"
-              />
-              <h4>
-                <span className="section-icon">
-                  <FaHashtag />
-                </span>
-                Hashing
-              </h4>
-              <ul>
-                <li>SHA-256 para identificadores directos</li>
-                <li>Salt único por registro</li>
-                <li>Separación de tablas de mapping</li>
-              </ul>
+            <div className="security-card" tabIndex="0">
+              <figure className="security-video">
+                <video className="solution-autoplay-video" muted loop preload="metadata" playsInline aria-label="Hashing">
+                  <source src="/haching.mp4" type="video/mp4" />
+                  Tu navegador no puede reproducir este video.
+                </video>
+              </figure>
+              <div className="security-card-content">
+                <h4>
+                  <span className="section-icon">
+                    <FaHashtag />
+                  </span>
+                  Hashing
+                </h4>
+                <ul>
+                  <li>SHA-256 para identificadores directos</li>
+                  <li>Salt único por registro</li>
+                  <li>Separación de tablas de mapping</li>
+                </ul>
+              </div>
             </div>
-            <div className="security-card">
-              <img
-                src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?w=400"
-                alt="Enmascaramiento"
-              />
-              <h4>
-                <span className="section-icon">
-                  <FaMasksTheater />
-                </span>
-                Enmascaramiento
-              </h4>
-              <ul>
-                <li>Enmascaramiento dinámico según rol</li>
-                <li>Datos sintéticos para desarrollo</li>
-                <li>k-anonimato (k≥5)</li>
-              </ul>
+            <div className="security-card" tabIndex="0">
+              <figure className="security-video">
+                <video className="solution-autoplay-video" muted loop preload="metadata" playsInline aria-label="Enmascaramiento">
+                  <source src="/enmascaramiento.mp4" type="video/mp4" />
+                  Tu navegador no puede reproducir este video.
+                </video>
+              </figure>
+              <div className="security-card-content">
+                <h4>
+                  <span className="section-icon">
+                    <FaMasksTheater />
+                  </span>
+                  Enmascaramiento
+                </h4>
+                <ul>
+                  <li>Enmascaramiento dinámico según rol</li>
+                  <li>Datos sintéticos para desarrollo</li>
+                  <li>k-anonimato (k≥5)</li>
+                </ul>
+              </div>
             </div>
-            <div className="security-card">
-              <img
-                src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400"
-                alt="RBAC"
-              />
-              <h4>
-                <span className="section-icon">
-                  <FaKey />
-                </span>
-                RBAC
-              </h4>
-              <ul>
-                <li>Principio de mínimo privilegio</li>
-                <li>Roles: Admin, DPO, Data Scientist, Viewer</li>
-                <li>Auditoría de accesos en tiempo real</li>
-              </ul>
+            <div className="security-card" tabIndex="0">
+              <figure className="security-video">
+                <video className="solution-autoplay-video" muted loop preload="metadata" playsInline aria-label="RBAC">
+                  <source src="/RBAC.mp4" type="video/mp4" />
+                  Tu navegador no puede reproducir este video.
+                </video>
+              </figure>
+              <div className="security-card-content">
+                <h4>
+                  <span className="section-icon">
+                    <FaKey />
+                  </span>
+                  RBAC
+                </h4>
+                <ul>
+                  <li>Principio de mínimo privilegio</li>
+                  <li>Roles: Admin, DPO, Data Scientist, Viewer</li>
+                  <li>Auditoría de accesos en tiempo real</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

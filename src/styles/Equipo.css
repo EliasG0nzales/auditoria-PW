@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Jost:wght@400;500;600;700&display=swap');
+
 .section-team {
   background: var(--gradient-primary);
   color: white;
@@ -121,5 +123,496 @@
   .course-info {
     flex-direction: column;
     gap: 15px;
+  }
+}
+
+.team-profiles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 28px;
+  margin-bottom: 50px;
+}
+
+.team-profile-card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  max-width: 400px;
+  height: 470px;
+  flex-direction: column;
+  justify-self: center;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 12px;
+  color: #2b2c48;
+  background: #fff;
+  box-shadow: 0 12px 36px rgba(8, 18, 47, 0.28), 0 0 0 5px rgba(255, 255, 255, 0.1);
+  transition: height 300ms ease, box-shadow 250ms ease;
+}
+
+.team-showcase-section {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  background-color: #091426;
+  background-image:
+    linear-gradient(158deg, transparent 0 18%, rgba(4, 15, 34, 0.94) 18.2% 27%, transparent 27.2%),
+    linear-gradient(25deg, transparent 0 70%, rgba(5, 20, 42, 0.95) 70.2% 80%, transparent 80.2%),
+    repeating-linear-gradient(0deg, transparent 0 61px, rgba(255, 255, 255, 0.075) 62px 63px),
+    linear-gradient(110deg, #ed008c 0%, #682678 42%, #0e7394 74%, #20c8be 100%);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.team-showcase-section > .container {
+  width: 100%;
+}
+
+.team-profile-stage {
+  position: relative;
+  display: flex;
+  width: min(460px, 100%);
+  justify-content: center;
+  margin: 0 auto 34px;
+}
+
+.team-profile-current {
+  width: min(350px, 100%);
+  animation: team-member-enter 360ms ease both;
+}
+
+.team-profile-stage .team-profile-card {
+  width: min(340px, 100%);
+}
+
+.team-member-switch {
+  position: absolute;
+  z-index: 3;
+  top: 205px;
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(10, 17, 39, 0.32);
+  cursor: pointer;
+  font-size: 0.9rem;
+  backdrop-filter: blur(8px);
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.team-member-switch:first-child {
+  left: 0;
+}
+
+.team-member-switch:last-child {
+  right: 0;
+}
+
+.team-member-switch:hover {
+  background: rgba(10, 17, 39, 0.72);
+  transform: scale(1.06);
+}
+
+.team-member-switch:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+.team-member-position {
+  margin-top: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-align: center;
+}
+
+@keyframes team-member-enter {
+  from { opacity: 0.45; transform: translateY(8px) scale(0.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.team-profile-card[data-state='#about'] {
+  height: 450px;
+}
+
+.team-profile-card[data-state='#contribution'] {
+  height: 510px;
+}
+
+.team-profile-card[data-state='#skills'] {
+  height: 490px;
+}
+
+.team-profile-header {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 200px;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(112deg, #70e4eb 0%, #a1dced 44%, #7362da 100%);
+  transition: height 300ms ease;
+}
+
+.team-profile-cover {
+  position: absolute;
+  top: -20%;
+  left: 0;
+  width: 100%;
+  height: 170px;
+  background: linear-gradient(112deg, #70e4eb 0%, #a1dced 44%, #7362da 100%);
+  filter: none;
+  transform: none;
+  transition: height 300ms ease, top 300ms ease;
+}
+
+.team-profile-header::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.2));
+  content: '';
+  pointer-events: none;
+}
+
+.team-profile-avatar {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  border: 4px solid rgba(255, 255, 255, 0.92);
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+  transform: translate(-50%, -58px);
+  transition: all 300ms ease;
+}
+
+.team-profile-name,
+.team-profile-role {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  width: calc(100% - 30px);
+  margin: 0;
+  overflow: hidden;
+  color: #262847;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-shadow: none;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  transition: all 300ms ease;
+}
+
+.team-profile-name {
+  bottom: 24px;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.team-profile-role {
+  bottom: 7px;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.team-profile-card.is-active .team-profile-header {
+  height: 90px;
+}
+
+.team-profile-card.is-active .team-profile-cover {
+  top: -48px;
+  height: 130px;
+}
+
+.team-profile-card.is-active .team-profile-avatar {
+  bottom: 10px;
+  left: 18px;
+  width: 54px;
+  height: 54px;
+  border-width: 2px;
+  transform: none;
+}
+
+.team-profile-card.is-active .team-profile-name,
+.team-profile-card.is-active .team-profile-role {
+  left: 84px;
+  width: calc(100% - 100px);
+  text-align: left;
+  transform: none;
+}
+
+.team-profile-card.is-active .team-profile-name {
+  bottom: 40px;
+  font-size: 1rem;
+}
+
+.team-profile-card.is-active .team-profile-role {
+  bottom: 20px;
+  font-size: 0.55rem;
+  letter-spacing: 0.06em;
+}
+
+.team-profile-main {
+  position: relative;
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  padding-top: 0;
+  background: #fff;
+}
+
+.team-profile-section {
+  display: none;
+  min-height: 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.team-profile-section.is-active {
+  display: block;
+  animation: team-profile-fade-in 450ms ease both;
+}
+
+.team-profile-content {
+  padding: 18px 22px;
+}
+
+.team-profile-subtitle {
+  margin: 0 0 10px;
+  color: #303453;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.team-profile-description {
+  margin: 0;
+  color: #69717c;
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.team-profile-links {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 18px;
+}
+
+.team-profile-links a {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #8fa5c7;
+  background: #f3f6fb;
+  font-size: 0.82rem;
+  text-decoration: none;
+  transition: color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.team-profile-links a:hover {
+  color: #fff;
+  background: #5659a8;
+  transform: translateY(-2px);
+}
+
+.team-profile-links a:focus-visible {
+  outline: 2px solid #5659a8;
+  outline-offset: 3px;
+}
+
+.team-profile-tabs {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex: 0 0 auto;
+  margin-top: auto;
+  background: #fff;
+  box-shadow: 0 -5px 15px rgba(40, 52, 85, 0.04);
+}
+
+.team-profile-tabs button {
+  flex: 1 1 auto;
+  min-height: 48px;
+  padding: 10px 5px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  color: #717587;
+  background: transparent;
+  cursor: pointer;
+  font-family: 'Jost', 'Segoe UI', sans-serif;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: color 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.team-profile-tabs button:hover,
+.team-profile-tabs button.is-active {
+  border-bottom-color: #8580f5;
+  color: #303453;
+  background: linear-gradient(180deg, rgba(207, 204, 255, 0), rgba(207, 204, 255, 0.22));
+}
+
+.team-profile-tabs button:focus-visible {
+  outline: 2px solid #7770db;
+  outline-offset: -4px;
+}
+
+.team-profile-timeline {
+  position: relative;
+  margin-top: 14px;
+}
+
+.team-profile-timeline::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10px;
+  width: 2px;
+  background: linear-gradient(180deg, #8b83f3, rgba(139, 131, 243, 0.08));
+  content: '';
+}
+
+.team-profile-item {
+  position: relative;
+  z-index: 1;
+  padding: 0 0 8px 32px;
+}
+
+.team-profile-item::before {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #7770db;
+  box-shadow: 0 0 0 1px #7770db;
+  content: '';
+}
+
+.team-profile-item::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #8580f5;
+  content: attr(data-step);
+  font-size: 0.55rem;
+  font-weight: 700;
+  transform: translateY(-17px);
+}
+
+.team-profile-item strong {
+  display: block;
+  margin-bottom: 7px;
+  color: #34374f;
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
+.team-profile-item p {
+  margin: 0;
+  color: #69717c;
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.team-profile-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 17px;
+}
+
+.team-profile-skills span {
+  padding: 5px 9px;
+  border: 1px solid rgba(104, 119, 164, 0.16);
+  border-radius: 20px;
+  color: #52617a;
+  background: rgba(93, 133, 193, 0.07);
+  font-size: 0.68rem;
+}
+
+@keyframes team-profile-fade-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 968px) {
+  .team-profiles-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .team-profiles-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .team-profile-card {
+    width: min(100%, 420px);
+  }
+
+  .team-showcase-section {
+    min-height: auto;
+    background-attachment: scroll;
+  }
+
+  .team-profile-stage {
+    width: min(420px, 100%);
+  }
+
+  .team-profile-stage .team-profile-card {
+    width: min(340px, 100%);
+  }
+
+  .team-member-switch {
+    top: 205px;
+    width: 34px;
+    height: 34px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-profile-card,
+  .team-profile-current,
+  .team-member-switch,
+  .team-profile-header,
+  .team-profile-cover,
+  .team-profile-avatar,
+  .team-profile-name,
+  .team-profile-role,
+  .team-profile-section,
+  .team-profile-tabs button {
+    transition-duration: 0.01ms;
+    animation-duration: 0.01ms;
+  }
+
+  .team-profile-links a {
+    transition-duration: 0.01ms;
   }
 }

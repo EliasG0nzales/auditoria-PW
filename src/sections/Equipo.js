@@ -1,11 +1,124 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FaUsers,
   FaBookOpen,
   FaGraduationCap,
   FaCalendarDays,
+  FaChevronLeft,
+  FaChevronRight,
+  FaFileLines,
+  FaShieldHalved,
+  FaChartColumn,
+  FaTriangleExclamation,
 } from 'react-icons/fa6';
 import '../styles/Equipo.css';
+
+const TeamMemberCard = ({ member, index }) => {
+  const [activeSection, setActiveSection] = useState('#about');
+  const tabs = [
+    { id: '#about', label: 'PERFIL' },
+    { id: '#contribution', label: 'EXPERIENCIA' },
+    { id: '#skills', label: 'COMPETENCIAS' },
+  ];
+  const reportLinks = [
+    { href: '#problemas', label: 'Problemas de auditoría', icon: FaTriangleExclamation },
+    { href: '#auditoria', label: 'Resultados de auditoría', icon: FaFileLines },
+    { href: '#flujos', label: 'Flujos y procesos', icon: FaChartColumn },
+    { href: '#soluciones', label: 'Propuestas de solución', icon: FaShieldHalved },
+  ];
+
+  return (
+    <article
+      className={`team-profile-card ${activeSection !== '#about' ? 'is-active' : ''}`}
+      data-state={activeSection}
+    >
+      <header className="team-profile-header">
+        <div
+          className="team-profile-cover"
+          aria-hidden="true"
+        />
+        <img className="team-profile-avatar" src={member.avatar} alt={`Retrato de ${member.nombre}`} />
+        <h3 className="team-profile-name">{member.nombre}</h3>
+        <p className="team-profile-role">{member.rol}</p>
+      </header>
+
+      <div className="team-profile-main">
+        <section
+          className={`team-profile-section ${activeSection === '#about' ? 'is-active' : ''}`}
+          id={`team-${index}-about`}
+          role="tabpanel"
+          aria-labelledby={`team-${index}-about-title`}
+          hidden={activeSection !== '#about'}
+        >
+          <div className="team-profile-content">
+            <h4 className="team-profile-subtitle" id={`team-${index}-about-title`}>PERFIL</h4>
+            <p className="team-profile-description">{member.descripcion}</p>
+            <nav className="team-profile-links" aria-label="Accesos al informe">
+              {reportLinks.map((link) => {
+                const LinkIcon = link.icon;
+                return (
+                  <a href={link.href} key={link.href} aria-label={link.label} title={link.label}>
+                    <LinkIcon />
+                  </a>
+                );
+              })}
+            </nav>
+          </div>
+        </section>
+
+        <section
+          className={`team-profile-section ${activeSection === '#contribution' ? 'is-active' : ''}`}
+          id={`team-${index}-contribution`}
+          role="tabpanel"
+          aria-labelledby={`team-${index}-contribution-title`}
+          hidden={activeSection !== '#contribution'}
+        >
+          <div className="team-profile-content">
+            <h4 className="team-profile-subtitle" id={`team-${index}-contribution-title`}>APORTE AL PROYECTO</h4>
+            <div className="team-profile-timeline">
+              <div className="team-profile-item" data-step={`0${index + 1}`}>
+                <strong>{member.rol}</strong>
+                <p>{member.descripcion}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          className={`team-profile-section ${activeSection === '#skills' ? 'is-active' : ''}`}
+          id={`team-${index}-skills`}
+          role="tabpanel"
+          aria-labelledby={`team-${index}-skills-title`}
+          hidden={activeSection !== '#skills'}
+        >
+          <div className="team-profile-content">
+            <h4 className="team-profile-subtitle" id={`team-${index}-skills-title`}>COMPETENCIAS</h4>
+            <p className="team-profile-description">Áreas de conocimiento aplicadas al análisis y protección de datos de salud.</p>
+            <div className="team-profile-skills">
+              {member.skills.map((skill) => <span key={skill}>{skill}</span>)}
+            </div>
+          </div>
+        </section>
+
+        <div className="team-profile-tabs" role="tablist" aria-label={`Secciones de ${member.nombre}`}>
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              role="tab"
+              aria-selected={activeSection === tab.id}
+              aria-controls={`team-${index}-${tab.id.slice(1)}`}
+              className={activeSection === tab.id ? 'is-active' : ''}
+              onClick={() => setActiveSection(tab.id)}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </article>
+  );
+};
 
 const Equipo = () => {
   // ============================================
@@ -13,12 +126,11 @@ const Equipo = () => {
   // ============================================
   const integrantes = [
     {
-      nombre: 'Nombre Integrante 1',
+      nombre: 'Elias Gonzales Jenhua',
       rol: 'Análisis Normativo y Auditoría RGPD',
       descripcion:
         'Responsable de la investigación de artículos vulnerados y la auditoría de cumplimiento normativo según RGPD y legislación peruana.',
-      avatar:
-        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300',
+      avatar: '/integrante%2001.png',
       skills: ['RGPD', 'Compliance', 'Legislación de Datos'],
     },
     {
@@ -40,9 +152,19 @@ const Equipo = () => {
       skills: ['Ciberseguridad', 'MLOps', 'Data Engineering'],
     },
   ];
+  const [activeMemberIndex, setActiveMemberIndex] = useState(0);
+  const activeMember = integrantes[activeMemberIndex];
+
+  const changeMember = (direction) => {
+    setActiveMemberIndex((currentIndex) => (
+      direction === 'next'
+        ? (currentIndex + 1) % integrantes.length
+        : (currentIndex - 1 + integrantes.length) % integrantes.length
+    ));
+  };
 
   return (
-    <section className="section section-team">
+    <section className="section section-team team-showcase-section">
       <div className="container">
         <div className="section-header">
           <h2>
@@ -58,29 +180,33 @@ const Equipo = () => {
           </p>
         </div>
 
-        <div className="team-grid">
-          {integrantes.map((member, index) => (
-            <div key={index} className="team-card">
-              <div className="team-card-image">
-                <img src={member.avatar} alt={member.nombre} />
-                <div className="team-overlay">
-                  <span className="team-number">#{index + 1}</span>
-                </div>
-              </div>
-              <div className="team-card-content">
-                <h3>{member.nombre}</h3>
-                <span className="team-role">{member.rol}</span>
-                <p>{member.descripcion}</p>
-                <div className="team-skills">
-                  {member.skills.map((skill, i) => (
-                    <span key={i} className="skill-tag">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="team-profile-stage" aria-label="Navegación entre integrantes">
+          <button
+            className="team-member-switch"
+            type="button"
+            onClick={() => changeMember('previous')}
+            aria-label="Integrante anterior"
+          >
+            <FaChevronLeft />
+          </button>
+          <div className="team-profile-current" aria-live="polite">
+            <TeamMemberCard
+              key={activeMember.nombre}
+              member={activeMember}
+              index={activeMemberIndex}
+            />
+            <p className="team-member-position">
+              INTEGRANTE {String(activeMemberIndex + 1).padStart(2, '0')} / {String(integrantes.length).padStart(2, '0')}
+            </p>
+          </div>
+          <button
+            className="team-member-switch"
+            type="button"
+            onClick={() => changeMember('next')}
+            aria-label="Siguiente integrante"
+          >
+            <FaChevronRight />
+          </button>
         </div>
 
         <div className="course-info">
