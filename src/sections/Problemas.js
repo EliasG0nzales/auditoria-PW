@@ -31,10 +31,10 @@ const problemas = [
       'Cifrar los datos y probar de forma periódica los controles técnicos y organizativos.',
     ],
     articulos: [
-      { numero: '5.1.f', titulo: 'Integridad y confidencialidad', detalle: 'Exige proteger los datos frente al tratamiento no autorizado o ilícito y frente a su pérdida, destrucción o daño accidental.' },
-      { numero: '9.1', titulo: 'Categorías especiales', detalle: 'Establece la regla general de prohibición para tratar datos de salud, salvo que concurra una excepción aplicable del artículo 9.2.' },
-      { numero: '25', titulo: 'Protección desde el diseño', detalle: 'Obliga a incorporar medidas de protección de datos desde el diseño y por defecto.' },
-      { numero: '32', titulo: 'Seguridad del tratamiento', detalle: 'Requiere medidas de seguridad adecuadas al riesgo, como seudonimización y cifrado cuando proceda.' },
+      { numero: 'Art. 9, Ley 29733', titulo: 'Principio de seguridad', detalle: 'Obliga a adoptar las medidas técnicas, organizativas y legales necesarias para garantizar la seguridad de los datos personales.' },
+      { numero: 'Art. 2.5 y art. 13.6, Ley 29733', titulo: 'Datos sensibles', detalle: 'Los datos de salud son datos sensibles y su tratamiento exige consentimiento por escrito, salvo una habilitación legal aplicable.' },
+      { numero: 'Arts. 5 y 9, Ley 29733; Reglamento', titulo: 'Protección desde el diseño', detalle: 'La arquitectura debe incorporar desde el inicio los principios de finalidad, proporcionalidad, seguridad y confidencialidad.' },
+      { numero: 'Art. 9, Ley 29733; Reglamento', titulo: 'Medidas de seguridad', detalle: 'Exige controles adecuados para prevenir accesos no autorizados, pérdida, alteración o tratamiento indebido.' },
     ],
   },
   {
@@ -55,10 +55,10 @@ const problemas = [
       'Registrar la versión del aviso, la fecha, la acción afirmativa y habilitar una revocación sencilla.',
     ],
     articulos: [
-      { numero: '4.11', titulo: 'Definición de consentimiento', detalle: 'Debe consistir en una manifestación libre, específica, informada e inequívoca mediante una declaración o una clara acción afirmativa.' },
-      { numero: '6.1.a', titulo: 'Licitud basada en consentimiento', detalle: 'El consentimiento es una de las posibles bases jurídicas para el tratamiento, cuando se elige como fundamento.' },
-      { numero: '7', titulo: 'Condiciones del consentimiento', detalle: 'El responsable debe poder demostrarlo; la solicitud debe distinguirse y retirarse con facilidad. Retirarlo no invalida lo tratado previamente.' },
-      { numero: '9.2.a', titulo: 'Consentimiento explícito para datos sensibles', detalle: 'Puede constituir una excepción para tratar datos de salud si se obtiene un consentimiento explícito válido y se cumplen las demás obligaciones.' },
+      { numero: 'Art. 5, Ley 29733', titulo: 'Principio de consentimiento', detalle: 'El tratamiento requiere el consentimiento previo, informado, expreso e inequívoco del titular, salvo las excepciones previstas por ley.' },
+      { numero: 'Art. 13, Ley 29733', titulo: 'Consentimiento válido', detalle: 'La información debe permitir que la persona conozca la finalidad y el uso de sus datos antes de decidir.' },
+      { numero: 'Art. 13, Ley 29733; Reglamento', titulo: 'Revocación del consentimiento', detalle: 'Debe habilitarse un mecanismo sencillo para revocar el consentimiento y gestionar los tratamientos que dependían de él.' },
+      { numero: 'Art. 13.6, Ley 29733', titulo: 'Consentimiento para datos sensibles', detalle: 'El tratamiento de datos sensibles requiere consentimiento por escrito, salvo las excepciones establecidas en la normativa.' },
     ],
   },
   {
@@ -72,17 +72,17 @@ const problemas = [
     hallazgo:
       'No se identificó un procedimiento que localice y elimine los datos de un paciente cuando corresponda atender una solicitud de supresión o una retirada del consentimiento.',
     riesgo:
-      'Los datos pueden permanecer en sistemas activos, copias o conjuntos de entrenamiento más tiempo del necesario. La retirada del consentimiento requiere detener el tratamiento basado en él; la supresión se evalúa según las condiciones y excepciones del RGPD.',
+      'Los datos pueden permanecer en sistemas activos, copias o conjuntos de entrenamiento más tiempo del necesario. La revocación del consentimiento exige revisar el tratamiento y la cancelación se gestiona mediante los derechos ARCO, conforme a la Ley 29733 y su Reglamento.',
     medidas: [
       'Mantener un inventario de sistemas, copias, conjuntos de entrenamiento y dependencias del modelo.',
       'Definir un flujo para recibir, verificar, ejecutar y documentar solicitudes dentro de los plazos legales.',
       'Evaluar la base jurídica vigente y las excepciones antes de borrar; verificar la purga y comunicar el resultado.',
     ],
     articulos: [
-      { numero: '5.1.e', titulo: 'Limitación del plazo de conservación', detalle: 'Los datos deben conservarse de forma identificable solo durante el tiempo necesario para los fines del tratamiento.' },
-      { numero: '7.3', titulo: 'Retirada del consentimiento', detalle: 'La persona puede retirar su consentimiento en cualquier momento; hacerlo debe ser tan fácil como otorgarlo.' },
-      { numero: '17.1.b', titulo: 'Supresión tras retirar el consentimiento', detalle: 'Puede proceder cuando la persona retira el consentimiento y no existe otro fundamento jurídico para el tratamiento.' },
-      { numero: '17', titulo: 'Derecho de supresión', detalle: 'Reconoce el derecho a solicitar la supresión cuando concurre alguno de sus motivos, sujeto a las excepciones previstas en el propio artículo.' },
+      { numero: 'Art. 10, Ley 29733', titulo: 'Principio de disposición', detalle: 'Los datos no deben conservarse más allá del tiempo necesario para la finalidad que justificó su tratamiento.' },
+      { numero: 'Art. 5, Ley 29733; Reglamento', titulo: 'Revocación del consentimiento', detalle: 'Debe existir un procedimiento accesible para retirar el consentimiento y dejar constancia de la solicitud.' },
+      { numero: 'Arts. 22-23, Ley 29733', titulo: 'Derechos de cancelación y oposición', detalle: 'La persona puede solicitar la cancelación cuando los datos ya no sean necesarios o se traten de forma incompatible, y oponerse en los casos previstos por ley.' },
+      { numero: 'Arts. 20-23, Ley 29733', titulo: 'Derechos ARCO', detalle: 'El sistema debe atender los derechos de acceso, rectificación, cancelación y oposición dentro de los procedimientos y plazos aplicables.' },
     ],
   },
   {
@@ -103,10 +103,10 @@ const problemas = [
       'Registrar y revisar accesos, revocar permisos al cambiar funciones y probar periódicamente las autorizaciones.',
     ],
     articulos: [
-      { numero: '5.1.f', titulo: 'Integridad y confidencialidad', detalle: 'Exige proteger la información frente al acceso no autorizado o ilícito.' },
-      { numero: '25', titulo: 'Protección de datos desde el diseño', detalle: 'La protección por defecto debe limitar la cantidad de datos, el alcance del tratamiento y su accesibilidad.' },
-      { numero: '29', titulo: 'Tratamiento bajo la autoridad del responsable', detalle: 'Las personas con acceso solo deben tratar datos siguiendo instrucciones del responsable, salvo obligación legal.' },
-      { numero: '32', titulo: 'Seguridad adecuada al riesgo', detalle: 'Incluye, cuando corresponda, controles de acceso, confidencialidad continua y evaluación periódica de las medidas.' },
+      { numero: 'Art. 9, Ley 29733', titulo: 'Principio de seguridad', detalle: 'Exige proteger la información frente al acceso no autorizado, la pérdida, alteración o tratamiento indebido.' },
+      { numero: 'Arts. 5 y 9, Ley 29733; Reglamento', titulo: 'Minimización y protección desde el diseño', detalle: 'Los controles deben limitar el acceso y el uso a lo necesario para la finalidad informada.' },
+      { numero: 'Ley 29733 y Reglamento', titulo: 'Deber de confidencialidad', detalle: 'Las personas autorizadas a tratar datos deben mantener la confidencialidad incluso después de terminada su relación con la organización.' },
+      { numero: 'Art. 9, Ley 29733; Reglamento', titulo: 'Controles de seguridad', detalle: 'Incluye controles de acceso, trazabilidad, gestión de permisos y revisión periódica de las medidas.' },
     ],
   },
 ];
@@ -190,7 +190,7 @@ const Problemas = () => {
             <div className="problem-articles">
               <h4>
                 <FaFileLines />
-                Artículos RGPD relacionados
+                Bases legales peruanas relacionadas
               </h4>
               <div className="problem-article-list">
                 {problema.articulos.map((articulo) => (
@@ -285,7 +285,7 @@ const Problemas = () => {
         <div className="problems-summary">
           <div className="summary-icon"><FaBolt /></div>
           <p>
-            Estas deficiencias requieren medidas correctivas antes de producción. Las infracciones de las obligaciones enumeradas en el artículo 83.5 del RGPD pueden dar lugar a multas administrativas de hasta <strong>20 millones de euros o el 4 % del volumen de negocio anual global</strong>, lo que resulte mayor, según las circunstancias del caso.
+            Estas deficiencias requieren medidas correctivas antes de producción. La Ley 29733 y su Reglamento contemplan sanciones administrativas graduadas según la gravedad de la infracción, desde <strong>0,5 hasta 100 UIT</strong>, además de medidas correctivas y otras consecuencias previstas por la normativa peruana.
           </p>
         </div>
       </div>

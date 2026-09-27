@@ -127,11 +127,11 @@ const Equipo = () => {
   const integrantes = [
     {
       nombre: 'Elias Gonzales Jenhua',
-      rol: 'Análisis Normativo y Auditoría RGPD',
+      rol: 'Análisis Normativo y Auditoría de Datos Personales',
       descripcion:
-        'Responsable de la investigación de artículos vulnerados y la auditoría de cumplimiento normativo según RGPD y legislación peruana.',
+        'Responsable de la investigación de artículos vulnerados y la auditoría de cumplimiento según la Ley 29733 y la legislación peruana.',
       avatar: '/integrante%2001.png',
-      skills: ['RGPD', 'Compliance', 'Legislación de Datos'],
+      skills: ['Ley 29733', 'Compliance', 'Legislación de Datos'],
     },
     {
       nombre: 'Nombre Integrante 2',

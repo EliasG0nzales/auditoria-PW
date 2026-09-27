@@ -16,7 +16,7 @@ const DPO = () => {
             <span className="section-icon">
               <FaUserShield />
             </span>
-            Rol del Data Protection Officer (DPO)
+            Responsable de Protección de Datos Personales
           </h2>
           <div className="section-line"></div>
         </div>
@@ -39,9 +39,9 @@ const DPO = () => {
                 Funciones Legales
               </h3>
               <ul>
-                <li>Supervisar el cumplimiento del RGPD y la Ley 29733</li>
+                <li>Supervisar el cumplimiento de la Ley 29733 y su Reglamento</li>
                 <li>Gestionar las solicitudes de derechos ARCO de los pacientes</li>
-                <li>Evaluar las Evaluaciones de Impacto de Protección de Datos (DPIA)</li>
+                <li>Evaluar los análisis de impacto en protección de datos personales</li>
                 <li>Ser punto de contacto con la autoridad de protección de datos</li>
                 <li>Asesorar sobre bases legales para el tratamiento</li>
               </ul>

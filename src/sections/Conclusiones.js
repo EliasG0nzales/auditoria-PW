@@ -25,10 +25,11 @@ const Conclusiones = () => {
             <div className="conclusion-number">01</div>
             <h4>Urgencia Normativa</h4>
             <p>
-              Las brechas identificadas representan violaciones graves al RGPD
-              y la legislación peruana. La empresa debe implementar las
-              correcciones antes de pasar a producción para evitar sanciones de
-              hasta el 4% de la facturación global.
+              Las brechas identificadas pueden vulnerar la Ley N.° 29733 y su
+              Reglamento. La empresa debe implementar las correcciones antes
+              de pasar a producción para reducir el riesgo de sanciones
+              administrativas de hasta 100 UIT, según la gravedad de la
+              infracción.
             </p>
           </div>
           <div className="conclusion-card">
@@ -46,9 +47,8 @@ const Conclusiones = () => {
             <h4>Consentimiento Válido</h4>
             <p>
               El mecanismo de consentimiento actual es inválido. Se requiere un
-              sistema de consentimiento granular, explícito e informado que
-              cumpla con los estándares del RGPD y permita su revocación
-              sencilla.
+              sistema de consentimiento granular, expreso e informado que
+              cumpla con la Ley N.° 29733 y permita su revocación sencilla.
             </p>
           </div>
           <div className="conclusion-card">
@@ -88,7 +88,8 @@ const Conclusiones = () => {
               <div className="timeline-marker info"><FaCircle /></div>
               <div className="timeline-content">
                 <strong>Mediano plazo (90-180 días):</strong> Implementar
-                Machine Unlearning. Realizar DPIA completo.
+                Machine Unlearning. Realizar una evaluación de impacto en
+                protección de datos personales.
               </div>
             </div>
             <div className="timeline-item">

@@ -154,9 +154,9 @@ const Contexto = () => {
                   Consultores de Compliance y Gobernanza de Datos en IA
                 </strong>
                 , el equipo ha sido contratado para evaluar la situación,
-                auditar las brechas normativas según marcos internacionales
-                como el <strong>RGPD</strong> y diseñar las medidas de
-                adecuación legal y técnica.
+                auditar las brechas conforme a la Constitución Política del
+                Perú, la <strong>Ley N.° 29733</strong> y su Reglamento, y
+                diseñar las medidas de adecuación legal y técnica.
               </p>
             </div>
           </div>

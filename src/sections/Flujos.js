@@ -87,7 +87,7 @@ const Flujos = () => {
               <FaFileLines />
             </span>
             Gráfico 1: Flujo de Consentimiento Informado y Gestión de
-            Derechos ARCO/RGPD
+            Derechos ARCO y protección de datos personales
           </h3>
           <div className="consent-content-frame">
             {imageControls()}

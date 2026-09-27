@@ -3,44 +3,95 @@ import { FaMagnifyingGlassChart } from 'react-icons/fa6';
 import '../styles/Auditoria.css';
 
 const Auditoria = () => {
+  const equivalencias = [
+    {
+      tema: 'Consentimiento',
+      peru: 'Ley 29733, arts. 5 y 13: consentimiento previo, informado, expreso e inequívoco.',
+      unionEuropea: 'RGPD, arts. 6 y 7: base jurídica, condiciones y demostración del consentimiento.',
+    },
+    {
+      tema: 'Datos de salud',
+      peru: 'Ley 29733, art. 2.5 y art. 13.6: dato sensible y consentimiento por escrito, salvo excepción legal.',
+      unionEuropea: 'RGPD, art. 9: categorías especiales de datos y excepciones para su tratamiento.',
+    },
+    {
+      tema: 'Derechos de las personas',
+      peru: 'Ley 29733, arts. 20-23: derechos ARCO (acceso, rectificación, cancelación y oposición).',
+      unionEuropea: 'RGPD, arts. 12-22: información, acceso, rectificación, supresión, oposición y otros derechos.',
+    },
+    {
+      tema: 'Seguridad y diseño',
+      peru: 'Ley 29733, art. 9, y D.S. 016-2024-JUS: medidas de seguridad y protección desde la planificación.',
+      unionEuropea: 'RGPD, arts. 25 y 32: protección desde el diseño y seguridad adecuada al riesgo.',
+    },
+    {
+      tema: 'Conservación',
+      peru: 'Ley 29733, art. 10: los datos no deben conservarse más tiempo del necesario para su finalidad.',
+      unionEuropea: 'RGPD, art. 5.1.e: limitación del plazo de conservación.',
+    },
+  ];
+
+  const diferencias = [
+    {
+      aspecto: 'Norma principal',
+      peru: 'Ley N.° 29733 y Reglamento aprobado por D.S. N.° 016-2024-JUS.',
+      unionEuropea: 'Reglamento (UE) 2016/679, conocido como RGPD.',
+    },
+    {
+      aspecto: 'Autoridad',
+      peru: 'Autoridad Nacional de Protección de Datos Personales, adscrita al MINJUSDH.',
+      unionEuropea: 'Autoridades de control de cada Estado miembro, coordinadas por el Comité Europeo de Protección de Datos.',
+    },
+    {
+      aspecto: 'Sanciones administrativas',
+      peru: 'Multas graduadas según la gravedad, de 0,5 a 100 UIT, además de medidas correctivas.',
+      unionEuropea: 'Hasta 20 millones de euros o el 4 % del volumen de negocio anual global, según corresponda.',
+    },
+    {
+      aspecto: 'Responsable especializado',
+      peru: 'La obligación de designar un oficial o responsable depende del tipo de entidad y del tratamiento aplicable.',
+      unionEuropea: 'El RGPD exige delegado de protección de datos en los supuestos de su art. 37.',
+    },
+  ];
+
   const vulneraciones = [
     {
-      articulo: 'Art. 5(1)(f)',
+      articulo: 'Art. 9, Ley 29733',
       principio: 'Integridad y Confidencialidad',
       problema:
         'Datos sensibles almacenados sin anonimización ni medidas de seguridad adecuadas.',
       impacto: 'Exposición de datos de salud identificables',
     },
     {
-      articulo: 'Art. 7',
+      articulo: 'Art. 13, Ley 29733',
       principio: 'Condiciones para el Consentimiento',
       problema:
         'Checkbox premarcado no constituye consentimiento libre, específico, informado e inequívoco.',
       impacto: 'Todo el procesamiento carece de base legal válida',
     },
     {
-      articulo: 'Art. 9(2)(a)',
+      articulo: 'Art. 13.6, Ley 29733',
       principio: 'Tratamiento de Datos Sensibles',
       problema:
         'Tratamiento de datos de salud requiere consentimiento explícito, no genérico.',
       impacto: 'Procesamiento ilícito de categorías especiales de datos',
     },
     {
-      articulo: 'Art. 17',
+      articulo: 'Arts. 22-23, Ley 29733',
       principio: 'Derecho de Supresión (Olvido)',
       problema:
         'No existe protocolo para eliminar datos del dataset de entrenamiento.',
       impacto: 'Imposibilidad de ejercer derechos fundamentales del titular',
     },
     {
-      articulo: 'Art. 25',
+      articulo: 'Arts. 5 y 9, Ley 29733',
       principio: 'Protección desde el Diseño',
       problema:
         'Pipeline no incorpora Privacy by Design ni Privacy by Default.',
       impacto: 'Arquitectura sin garantías de privacidad integradas',
     },
     {
-      articulo: 'Art. 32',
+      articulo: 'Art. 9, Ley 29733',
       principio: 'Seguridad del Tratamiento',
       problema:
         'Ausencia de RBAC permite acceso indiscriminado a datos personales.',
@@ -56,7 +107,7 @@ const Auditoria = () => {
             <span className="section-icon">
               <FaMagnifyingGlassChart />
             </span>{' '}
-            Auditoría de Cumplimiento RGPD
+            Auditoría de Cumplimiento en Protección de Datos Personales
           </h2>
           <div className="section-line"></div>
         </div>
@@ -64,19 +115,17 @@ const Auditoria = () => {
         <div className="audit-intro">
           <img
             src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800"
-            alt="Regulación RGPD"
+            alt="Regulación peruana de protección de datos personales"
             className="audit-image"
           />
           <div className="audit-intro-text">
             <h3>Marco Regulatorio Aplicable</h3>
             <p>
-              El análisis se basa en el{' '}
-              <strong>
-                Reglamento General de Protección de Datos (RGPD)
-              </strong>{' '}
-              de la Unión Europea, complementado con la{' '}
-              <strong>Ley N° 29733</strong> de Protección de Datos Personales
-              de Perú y su reglamento.
+              El análisis se basa en el artículo 2, numeral 6, de la{' '}
+              <strong>Constitución Política del Perú</strong>, la{' '}
+              <strong>Ley N.° 29733</strong>, Ley de Protección de Datos
+              Personales, y su Reglamento vigente, aprobado por el{' '}
+              <strong>D.S. N.° 016-2024-JUS</strong>.
             </p>
             <p>
               Se identificaron múltiples vulneraciones que comprometen la
@@ -86,11 +135,57 @@ const Auditoria = () => {
           </div>
         </div>
 
+        <div className="audit-comparison-grid">
+          <div className="audit-table-container">
+            <h3 className="audit-subtitle">Tabla 1. Equivalencia de obligaciones</h3>
+            <table className="audit-table comparison-table">
+              <thead>
+                <tr>
+                  <th>Tema</th>
+                  <th>Perú</th>
+                  <th>Unión Europea</th>
+                </tr>
+              </thead>
+              <tbody>
+                {equivalencias.map((fila) => (
+                  <tr key={fila.tema}>
+                    <td><strong>{fila.tema}</strong></td>
+                    <td>{fila.peru}</td>
+                    <td>{fila.unionEuropea}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="audit-table-container">
+            <h3 className="audit-subtitle">Tabla 2. Diferencias entre marcos legales</h3>
+            <table className="audit-table comparison-table">
+              <thead>
+                <tr>
+                  <th>Aspecto</th>
+                  <th>Perú</th>
+                  <th>Unión Europea</th>
+                </tr>
+              </thead>
+              <tbody>
+                {diferencias.map((fila) => (
+                  <tr key={fila.aspecto}>
+                    <td><strong>{fila.aspecto}</strong></td>
+                    <td>{fila.peru}</td>
+                    <td>{fila.unionEuropea}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         <div className="audit-table-container">
           <table className="audit-table">
             <thead>
               <tr>
-                <th>Artículo RGPD</th>
+                <th>Base legal peruana</th>
                 <th>Principio</th>
                 <th>Problema Detectado</th>
                 <th>Impacto</th>
