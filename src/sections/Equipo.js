@@ -134,21 +134,19 @@ const Equipo = () => {
       skills: ['Ley 29733', 'Compliance', 'Legislación de Datos'],
     },
     {
-      nombre: 'Nombre Integrante 2',
+      nombre: 'PIERO JAMIR AGUILAR TORREL',
       rol: 'Clasificación de Datos y Diseño de Flujos',
       descripcion:
         'Encargado de la clasificación de variables, diagramación de flujos de consentimiento y arquitectura Privacy by Design.',
-      avatar:
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300',
+      avatar: '/integrante%2002.png',
       skills: ['Data Classification', 'Privacy by Design', 'UX'],
     },
     {
-      nombre: 'Nombre Integrante 3',
+      nombre: 'JORDY FELIPE TICONA YANA',
       rol: 'Propuestas de Solución y Seguridad',
       descripcion:
         'Desarrolló las propuestas técnicas de seguridad, Machine Unlearning y plan de mitigación de accesos no autorizados.',
-      avatar:
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300',
+      avatar: '/integrante%2003.png',
       skills: ['Ciberseguridad', 'MLOps', 'Data Engineering'],
     },
   ];
