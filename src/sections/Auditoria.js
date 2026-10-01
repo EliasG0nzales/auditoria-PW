@@ -31,29 +31,6 @@ const Auditoria = () => {
     },
   ];
 
-  const diferencias = [
-    {
-      aspecto: 'Norma principal',
-      peru: 'Ley N.° 29733 y Reglamento aprobado por D.S. N.° 016-2024-JUS.',
-      unionEuropea: 'Reglamento (UE) 2016/679, conocido como RGPD.',
-    },
-    {
-      aspecto: 'Autoridad',
-      peru: 'Autoridad Nacional de Protección de Datos Personales, adscrita al MINJUSDH.',
-      unionEuropea: 'Autoridades de control de cada Estado miembro, coordinadas por el Comité Europeo de Protección de Datos.',
-    },
-    {
-      aspecto: 'Sanciones administrativas',
-      peru: 'Multas graduadas según la gravedad, de 0,5 a 100 UIT, además de medidas correctivas.',
-      unionEuropea: 'Hasta 20 millones de euros o el 4 % del volumen de negocio anual global, según corresponda.',
-    },
-    {
-      aspecto: 'Responsable especializado',
-      peru: 'La obligación de designar un oficial o responsable depende del tipo de entidad y del tratamiento aplicable.',
-      unionEuropea: 'El RGPD exige delegado de protección de datos en los supuestos de su art. 37.',
-    },
-  ];
-
   const vulneraciones = [
     {
       articulo: 'Art. 9, Ley 29733',
@@ -158,27 +135,6 @@ const Auditoria = () => {
             </table>
           </div>
 
-          <div className="audit-table-container">
-            <h3 className="audit-subtitle">Tabla 2. Diferencias entre marcos legales</h3>
-            <table className="audit-table comparison-table">
-              <thead>
-                <tr>
-                  <th>Aspecto</th>
-                  <th>Perú</th>
-                  <th>Unión Europea</th>
-                </tr>
-              </thead>
-              <tbody>
-                {diferencias.map((fila) => (
-                  <tr key={fila.aspecto}>
-                    <td><strong>{fila.aspecto}</strong></td>
-                    <td>{fila.peru}</td>
-                    <td>{fila.unionEuropea}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
         </div>
 
         <div className="audit-table-container">
