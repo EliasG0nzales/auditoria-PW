@@ -1,8 +1,6 @@
 import React from 'react';
 import {
   FaFileLines,
-  FaBullseye,
-  FaCircle,
 } from 'react-icons/fa6';
 import '../styles/Conclusiones.css';
 
@@ -62,45 +60,6 @@ const Conclusiones = () => {
           </div>
         </div>
 
-        <div className="recommendations-box">
-          <h3>
-            <span className="section-icon">
-              <FaBullseye />
-            </span>{' '}
-            Recomendaciones Prioritarias
-          </h3>
-          <div className="recommendation-timeline">
-            <div className="timeline-item">
-              <div className="timeline-marker danger"><FaCircle /></div>
-              <div className="timeline-content">
-                <strong>Inmediato (0-30 días):</strong> Implementar RBAC y
-                cifrado. Detener acceso a datos sin anonimizar.
-              </div>
-            </div>
-            <div className="timeline-item">
-              <div className="timeline-marker warning"><FaCircle /></div>
-              <div className="timeline-content">
-                <strong>Corto plazo (30-90 días):</strong> Rediseñar mecanismo
-                de consentimiento. Designar DPO.
-              </div>
-            </div>
-            <div className="timeline-item">
-              <div className="timeline-marker info"><FaCircle /></div>
-              <div className="timeline-content">
-                <strong>Mediano plazo (90-180 días):</strong> Implementar
-                Machine Unlearning. Realizar una evaluación de impacto en
-                protección de datos personales.
-              </div>
-            </div>
-            <div className="timeline-item">
-              <div className="timeline-marker success"><FaCircle /></div>
-              <div className="timeline-content">
-                <strong>Largo plazo (180+ días):</strong> Auditorías
-                periódicas. Certificación de cumplimiento.
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

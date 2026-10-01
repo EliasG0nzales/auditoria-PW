@@ -39,47 +39,6 @@
   opacity: 0.85;
 }
 
-.recommendations-box {
-  background: var(--dark-light);
-  border-radius: 16px;
-  padding: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.recommendations-box h3 {
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 1.3rem;
-}
-
-.recommendation-timeline {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.timeline-item {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-  margin-bottom: 22px;
-  padding-bottom: 22px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.timeline-item:last-child {
-  border-bottom: none;
-}
-
-.timeline-marker {
-  font-size: 1.3rem;
-  flex-shrink: 0;
-}
-
-.timeline-content {
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
 @media (max-width: 968px) {
   .conclusions-grid {
     grid-template-columns: 1fr;

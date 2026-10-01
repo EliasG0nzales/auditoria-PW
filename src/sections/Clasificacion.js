@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaChartColumn, FaArrowLeft, FaArrowRight, FaPlus } from 'react-icons/fa6';
+import { FaChartColumn, FaPlus } from 'react-icons/fa6';
 import '../styles/Clasificacion.css';
 
 const Clasificacion = () => {
@@ -85,30 +85,8 @@ const Clasificacion = () => {
       imagen: 'https://images.unsplash.com/photo-1510017803434-a899398421b3?auto=format&fit=crop&w=1600&q=85',
     },
   ];
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [transition, setTransition] = useState(null);
-
-  const navigate = (direction) => {
-    if (transition) return;
-    const nextIndex = direction === 'next'
-      ? (activeIndex + 1) % datos.length
-      : (activeIndex - 1 + datos.length) % datos.length;
-    const nextTransition = {
-      current: activeIndex,
-      next: nextIndex,
-      direction,
-      phase: 'preparing',
-    };
-
-    setTransition(nextTransition);
-    window.requestAnimationFrame(() => {
-      setTransition({ ...nextTransition, phase: 'moving' });
-      window.setTimeout(() => {
-        setActiveIndex(nextIndex);
-        setTransition(null);
-      }, 460);
-    });
-  };
+  const [expandedIndex, setExpandedIndex] = useState(0);
+  const [featuredIndex, setFeaturedIndex] = useState(0);
 
   return (
     <section className="section section-dark">
@@ -124,80 +102,70 @@ const Clasificacion = () => {
           <p className="section-subtitle">
             Dato → qué representa → qué puede revelar → riesgo
           </p>
+          <p className="classification-summary">
+            Un recorrido por los datos de salud y su nivel de exposición para entender qué proteger y por qué.
+          </p>
         </div>
 
-        <div
-          className="classification-showcase"
-          role="region"
-          aria-label="Carrusel de categorías de datos"
-          aria-roledescription="carrusel"
-        >
-          {datos.map((dato, index) => {
-            let status = index === activeIndex ? 'active' : 'inactive';
-            if (transition) {
-              if (index === transition.current) {
-                status = transition.direction === 'next' ? 'before' : 'after';
-              } else if (index === transition.next) {
-                status = transition.phase === 'preparing'
-                  ? `becoming-active-from-${transition.direction === 'next' ? 'after' : 'before'}`
-                  : 'active';
-              }
-            }
-
-            return (
-              <article
-                className="classification-slide"
-                data-status={status}
-                aria-hidden={status !== 'active'}
-                aria-label={`${dato.info}, categoría ${index + 1} de ${datos.length}`}
+        <div className="classification-experience">
+          <div className="classification-accordion" aria-label="Categorías de datos">
+            {datos.map((dato, index) => (
+              <details
+                className="classification-item"
                 key={dato.info}
+                open={expandedIndex === index}
+                onToggle={(event) => {
+                  if (event.currentTarget.open) {
+                    setExpandedIndex(index);
+                    setFeaturedIndex(index);
+                  } else {
+                    setExpandedIndex((current) => current === index ? -1 : current);
+                  }
+                }}
               >
-                <div
-                  className="classification-slide-image classification-slide-section"
-                  style={{ backgroundImage: `url("${dato.imagen}")` }}
-                  role="img"
-                  aria-label={`Imagen relacionada con ${dato.info}`}
-                />
-                <div className="classification-slide-description classification-slide-section">
+                <summary className="classification-item-summary">
+                  <span className="classification-item-count">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className="classification-item-name">{dato.info}</span>
+                  <span className="classification-item-risk" style={{ color: dato.color }}>
+                    {dato.riesgo}
+                  </span>
+                  <FaPlus className="classification-item-icon" aria-hidden="true" />
+                </summary>
+                <div className="classification-item-content">
                   <p>{dato.descripcion}</p>
-                  <div className="classification-slide-meta">
-                    <span>{dato.clasificacion}</span>
-                    <span style={{ color: dato.color }}>{dato.riesgo}</span>
-                  </div>
+                  <dl className="classification-item-facts">
+                    <div>
+                      <dt>Clasificación</dt>
+                      <dd>{dato.clasificacion}</dd>
+                    </div>
+                    <div>
+                      <dt>Puede revelar</dt>
+                      <dd>{dato.revela}</dd>
+                    </div>
+                    <div>
+                      <dt>Ejemplo</dt>
+                      <dd>{dato.ejemplo}</dd>
+                    </div>
+                  </dl>
                 </div>
-                <div className="classification-slide-title classification-slide-section">
-                  <div>
-                    <span className="classification-slide-count">DATO {String(index + 1).padStart(2, '0')} / {String(datos.length).padStart(2, '0')}</span>
-                    <h3>{dato.info}</h3>
-                    <p>Ejemplo: {dato.ejemplo}</p>
-                  </div>
-                  <FaPlus aria-hidden="true" />
-                </div>
-                <div className="classification-slide-nav classification-slide-section">
-                  <button
-                    className="classification-slide-nav-button"
-                    type="button"
-                    onClick={() => navigate('previous')}
-                    aria-label="Categoría anterior"
-                    disabled={Boolean(transition)}
-                    tabIndex={status === 'active' ? 0 : -1}
-                  >
-                    <FaArrowLeft />
-                  </button>
-                  <button
-                    className="classification-slide-nav-button"
-                    type="button"
-                    onClick={() => navigate('next')}
-                    aria-label="Siguiente categoría"
-                    disabled={Boolean(transition)}
-                    tabIndex={status === 'active' ? 0 : -1}
-                  >
-                    <FaArrowRight />
-                  </button>
-                </div>
-              </article>
-            );
-          })}
+              </details>
+            ))}
+          </div>
+
+          <figure
+            className="classification-feature"
+            style={{ backgroundImage: `url("${datos[featuredIndex].imagen}")` }}
+            role="img"
+            aria-label={`Imagen relacionada con ${datos[featuredIndex].info}`}
+          >
+            <figcaption className="classification-feature-caption">
+              <span>DATOS EN SALUD · {String(featuredIndex + 1).padStart(2, '0')} / {String(datos.length).padStart(2, '0')}</span>
+              <h3>{datos[featuredIndex].info}</h3>
+              <p>Ejemplo: {datos[featuredIndex].ejemplo}</p>
+            </figcaption>
+          </figure>
         </div>
 
         <div className="classification-note">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   FaShieldHalved,
   FaClipboardCheck,
@@ -7,8 +7,6 @@ import {
   FaTriangleExclamation,
   FaFileLines,
   FaBolt,
-  FaChevronLeft,
-  FaChevronRight,
 } from 'react-icons/fa6';
 import '../styles/Problemas.css';
 
@@ -17,8 +15,12 @@ const problemas = [
     icon: FaShieldHalved,
     categoria: 'Confidencialidad y datos sensibles',
     titulo: 'Datos de salud sin anonimización',
-    frase: 'Un identificador indirecto puede volver a señalar a una persona.',
     severidad: 'Crítico',
+    resumen: 'Los datos sensibles no cuentan con protección suficiente frente a la reidentificación.',
+    descripcion: 'La combinación de información clínica y demográfica puede volver a vincular los registros con un paciente.',
+    riesgoBreve: 'Exposición de información médica, reidentificación y acceso indebido.',
+    medidasBreves: 'Minimizar y seudonimizar los datos; separar las claves y cifrar la información.',
+    baseLegalBreve: 'Ley 29733: arts. 2.5 y 13.6 (datos sensibles) y art. 9 (seguridad); Reglamento: medidas de seguridad y protección desde el diseño.',
     imagen: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200&q=85',
     alt: 'Código y datos representando información sensible sin protección suficiente',
     hallazgo:
@@ -41,8 +43,12 @@ const problemas = [
     icon: FaClipboardCheck,
     categoria: 'Transparencia y base jurídica',
     titulo: 'Consentimiento no válido',
-    frase: 'Una casilla ya marcada no demuestra una decisión libre.',
     severidad: 'Crítico',
+    resumen: 'La aceptación premarcada no demuestra una decisión libre y específica del paciente.',
+    descripcion: 'Una sola aceptación agrupa finalidades y no registra una acción afirmativa por cada uso de datos.',
+    riesgoBreve: 'Tratamiento sin consentimiento válido cuando este sea la base jurídica.',
+    medidasBreves: 'Desmarcar las opciones por defecto, separar finalidades y habilitar una revocación sencilla.',
+    baseLegalBreve: 'Ley 29733: arts. 5 y 13 (consentimiento informado) y art. 13.6 (datos sensibles); Reglamento: condiciones y revocación.',
     imagen: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&q=85',
     alt: 'Persona consultando una aplicación móvil para gestionar su consentimiento',
     hallazgo:
@@ -65,8 +71,12 @@ const problemas = [
     icon: FaTrashCan,
     categoria: 'Retención y derechos de las personas',
     titulo: 'Sin protocolo de eliminación',
-    frase: 'La retirada no debe perderse entre copias, sistemas y modelos.',
     severidad: 'Alto',
+    resumen: 'No existe un flujo claro para localizar y eliminar los datos cuando corresponde.',
+    descripcion: 'La solicitud puede no alcanzar las copias, sistemas activos o conjuntos de entrenamiento.',
+    riesgoBreve: 'Conservación excesiva y solicitudes de cancelación sin atender.',
+    medidasBreves: 'Inventariar sistemas y copias; documentar solicitudes y verificar la purga antes de responder.',
+    baseLegalBreve: 'Ley 29733: art. 10 (conservación limitada) y arts. 20–23 (derechos ARCO); Reglamento: procedimientos y plazos aplicables.',
     imagen: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=85',
     alt: 'Infraestructura de almacenamiento que representa datos retenidos en sistemas',
     hallazgo:
@@ -89,8 +99,12 @@ const problemas = [
     icon: FaKey,
     categoria: 'Control de acceso y responsabilidad',
     titulo: 'Accesos sin control por roles',
-    frase: 'Cada perfil debe ver solo los datos que necesita.',
     severidad: 'Crítico',
+    resumen: 'Los perfiles técnicos pueden consultar identificadores que no necesitan para su función.',
+    descripcion: 'El pipeline no limita de forma suficiente el acceso según las responsabilidades de cada perfil.',
+    riesgoBreve: 'Consulta, extracción o divulgación no autorizada de datos personales.',
+    medidasBreves: 'Aplicar mínimo privilegio, separar identificadores y auditar periódicamente los permisos.',
+    baseLegalBreve: 'Ley 29733: art. 9 (seguridad) y Reglamento: controles de acceso, trazabilidad y deber de confidencialidad.',
     imagen: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=85',
     alt: 'Panel de seguridad digital que representa controles de acceso insuficientes',
     hallazgo:
@@ -112,15 +126,6 @@ const problemas = [
 ];
 
 const Problemas = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isDetailOpen, setIsDetailOpen] = useState(false);
-  const problema = problemas[activeIndex];
-  const Icon = problema.icon;
-
-  const showProblem = (index) => {
-    setActiveIndex((index + problemas.length) % problemas.length);
-  };
-
   return (
     <section className="section section-dark problems-section">
       <div className="container">
@@ -137,150 +142,45 @@ const Problemas = () => {
           </p>
         </div>
 
-        {isDetailOpen ? (
-          <div className="problem-detail-view">
-            <button className="problem-back-button" type="button" onClick={() => setIsDetailOpen(false)}>
-              <FaChevronLeft />
-              Volver a los hallazgos
-            </button>
-            <div className="problem-showcase" aria-live="polite">
-              <div className="problem-visual">
-                <img src={problema.imagen} alt={problema.alt} key={problema.imagen} />
-                <div className="problem-visual-shade"></div>
-                <div className="problem-visual-topline">
-                  <span>HALLAZGO {String(activeIndex + 1).padStart(2, '0')}</span>
-                  <span className={`severity-badge severity-${problema.severidad.toLowerCase()}`}>
-                    {problema.severidad}
-                  </span>
-                </div>
-                <div className="problem-visual-title">
-                  <span className="problem-category">{problema.categoria}</span>
-                  <h3>{problema.titulo}</h3>
-                </div>
-              </div>
+        <div className="problems-overview" aria-label="Resumen de los cuatro hallazgos">
+          {problemas.map((item, index) => {
+            const Icon = item.icon;
 
-              <article
-                className="problem-detail"
-                id="problem-detail-panel"
-                role="tabpanel"
-                aria-label={problema.titulo}
-              >
-            <div className="problem-detail-heading">
-              <span className="problem-icon"><Icon /></span>
-              <span>DIAGNÓSTICO Y MARCO NORMATIVO</span>
-            </div>
-
-            <div className="problem-copy-block">
-              <h4>Hallazgo</h4>
-              <p>{problema.hallazgo}</p>
-            </div>
-
-            <div className="problem-copy-block problem-risk">
-              <h4>Riesgo para las personas y la organización</h4>
-              <p>{problema.riesgo}</p>
-            </div>
-
-            <div className="problem-copy-block">
-              <h4>Medidas prioritarias</h4>
-              <ul className="problem-measures">
-                {problema.medidas.map((medida) => <li key={medida}>{medida}</li>)}
-              </ul>
-            </div>
-
-            <div className="problem-articles">
-              <h4>
-                <FaFileLines />
-                Bases legales peruanas relacionadas
-              </h4>
-              <div className="problem-article-list">
-                {problema.articulos.map((articulo) => (
-                  <div className="problem-article" key={articulo.numero}>
-                    <span className="problem-article-number">Art. {articulo.numero}</span>
-                    <div>
-                      <strong>{articulo.titulo}</strong>
-                      <p>{articulo.detalle}</p>
-                    </div>
+            return (
+              <article className="problem-overview-item" key={item.titulo}>
+                <header className="problem-overview-header">
+                  <span className="problem-overview-icon"><Icon /></span>
+                  <div>
+                    <span className="problem-overview-category">HALLAZGO {String(index + 1).padStart(2, '0')} · {item.categoria}</span>
+                    <h3>{item.titulo}</h3>
                   </div>
-                ))}
-              </div>
-            </div>
+                  <span className={`severity-badge severity-${item.severidad.toLowerCase()}`}>
+                    {item.severidad}
+                  </span>
+                </header>
+                <p className="problem-overview-summary">{item.resumen}</p>
+                <dl className="problem-overview-details">
+                  <div>
+                    <dt>Descripción</dt>
+                    <dd>{item.descripcion}</dd>
+                  </div>
+                  <div className="problem-overview-risk">
+                    <dt>Riesgo</dt>
+                    <dd>{item.riesgoBreve}</dd>
+                  </div>
+                  <div>
+                    <dt>Medida clave</dt>
+                    <dd>{item.medidasBreves}</dd>
+                  </div>
+                  <div>
+                    <dt><FaFileLines aria-hidden="true" /> Base legal peruana</dt>
+                    <dd>{item.baseLegalBreve}</dd>
+                  </div>
+                </dl>
               </article>
-            </div>
+            );
+          })}
           </div>
-        ) : (
-          <div className="problem-carousel">
-            <div className="problem-stage" aria-label="Carrusel de hallazgos de auditoría">
-              {problemas.map((item, index) => {
-                const offset = (index - activeIndex + problemas.length) % problemas.length;
-                const position = offset === 0
-                  ? 'current'
-                  : offset === 1
-                    ? 'next'
-                    : offset === problemas.length - 1
-                      ? 'previous'
-                      : 'hidden';
-
-                return (
-                  <button
-                    className={`problem-slide is-${position}`}
-                    type="button"
-                    key={item.titulo}
-                    aria-label={`${item.titulo}, ${item.severidad}. ${position === 'current' ? 'Abrir diagnóstico completo' : 'Seleccionar hallazgo'}`}
-                    aria-current={position === 'current' ? 'true' : undefined}
-                    onClick={() => {
-                      if (position === 'current') {
-                        setIsDetailOpen(true);
-                      } else {
-                        showProblem(index);
-                      }
-                    }}
-                  >
-                    <img src={item.imagen} alt="" />
-                    <span className="problem-slide-shade"></span>
-                    <span className="problem-slide-side">{item.frase}</span>
-                    <span className="problem-slide-topline">
-                      <span>HALLAZGO {String(index + 1).padStart(2, '0')}</span>
-                      <span className={`severity-badge severity-${item.severidad.toLowerCase()}`}>
-                        {item.severidad}
-                      </span>
-                    </span>
-                    <span className="problem-slide-copy">
-                      <span>{item.categoria}</span>
-                      <strong>{item.titulo}</strong>
-                      <span className="problem-slide-prompt">Ver diagnóstico</span>
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-            <div className="problem-carousel-caption" aria-live="polite">
-              <p>{problema.frase}</p>
-              <span>{String(activeIndex + 1).padStart(2, '0')} / {String(problemas.length).padStart(2, '0')}</span>
-            </div>
-
-            <div className="problem-navigation">
-              <button type="button" onClick={() => showProblem(activeIndex - 1)} aria-label="Hallazgo anterior">
-                <FaChevronLeft />
-              </button>
-              <div className="problem-pagination" aria-label="Seleccionar hallazgo">
-                {problemas.map((item, index) => (
-                  <button
-                    className={index === activeIndex ? 'is-active' : ''}
-                    key={item.titulo}
-                    type="button"
-                    aria-label={`Mostrar hallazgo ${index + 1}: ${item.titulo}`}
-                    aria-current={index === activeIndex ? 'true' : undefined}
-                    onClick={() => showProblem(index)}
-                  />
-                ))}
-              </div>
-              <button type="button" onClick={() => showProblem(activeIndex + 1)} aria-label="Siguiente hallazgo">
-                <FaChevronRight />
-              </button>
-            </div>
-          </div>
-        )}
 
         <div className="problems-summary">
           <div className="summary-icon"><FaBolt /></div>

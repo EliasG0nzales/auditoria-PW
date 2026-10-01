@@ -110,6 +110,14 @@
   line-height: 1.7;
 }
 
+.classification-summary {
+  max-width: 680px;
+  margin: 12px auto 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
 @media (max-width: 968px) {
   .classification-cards {
     grid-template-columns: 1fr;
@@ -129,6 +137,8 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: #060b19;
   isolation: isolate;
+  touch-action: pan-y;
+  user-select: none;
 }
 
 .classification-slide {
@@ -150,6 +160,11 @@
 
 .classification-slide[data-status='active'] {
   transform: translateX(0);
+}
+
+.classification-slide[data-dragging='true'] {
+  cursor: grabbing;
+  transition: none;
 }
 
 .classification-slide[data-status='before'] {
@@ -363,6 +378,258 @@
 @media (prefers-reduced-motion: reduce) {
   .classification-slide,
   .classification-slide-nav-button {
+    transition-duration: 0.01ms;
+  }
+}
+
+.classification-experience {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  min-height: 620px;
+  margin-bottom: 40px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background: #08090b;
+}
+
+.classification-accordion {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: clamp(20px, 3vw, 42px);
+  background-color: #090a0d;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+.classification-item {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.045);
+  transition: border-color 220ms ease, background-color 220ms ease, border-radius 320ms ease;
+}
+
+.classification-item[open] {
+  border-color: rgba(255, 255, 255, 0.17);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.075);
+}
+
+.classification-item-summary {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 17px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.classification-item-summary::-webkit-details-marker {
+  display: none;
+}
+
+.classification-item-summary:focus-visible {
+  outline: 2px solid var(--accent-light);
+  outline-offset: -3px;
+  border-radius: inherit;
+}
+
+.classification-item-count {
+  flex: 0 0 25px;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.classification-item-name {
+  min-width: 0;
+  flex: 1;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.classification-item-risk {
+  flex: 0 0 auto;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+.classification-item-icon {
+  flex: 0 0 auto;
+  width: 25px;
+  height: 25px;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.9);
+  transition: transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.classification-item[open] .classification-item-icon {
+  transform: rotate(45deg);
+}
+
+.classification-item-content {
+  padding: 0 20px 19px 54px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.classification-item-facts {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.classification-item-facts > div {
+  display: grid;
+  grid-template-columns: minmax(88px, 0.7fr) minmax(0, 1.5fr);
+  gap: 12px;
+  padding-top: 9px;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.classification-item-facts dt {
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.classification-item-facts dd {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.classification-feature {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 100%;
+  align-items: flex-end;
+  margin: 0;
+  overflow: hidden;
+  background-color: #171a1e;
+  background-position: center;
+  background-size: cover;
+  isolation: isolate;
+  transition: background-image 300ms ease;
+}
+
+.classification-feature::before {
+  position: absolute;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 24%, rgba(0, 0, 0, 0.8) 100%);
+  content: '';
+  inset: 0;
+}
+
+.classification-feature-caption {
+  width: 100%;
+  padding: clamp(24px, 4vw, 54px);
+}
+
+.classification-feature-caption > span {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.classification-feature-caption h3 {
+  max-width: 520px;
+  margin-top: 12px;
+  color: white;
+  font-size: clamp(1.8rem, 3.2vw, 3.3rem);
+  line-height: 1.05;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.classification-feature-caption p {
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.86rem;
+}
+
+@supports (interpolate-size: allow-keywords) {
+  .classification-item {
+    interpolate-size: allow-keywords;
+  }
+
+  .classification-item::details-content {
+    block-size: 0;
+    overflow-y: clip;
+    transition: block-size 420ms cubic-bezier(0.2, 0.8, 0.2, 1), content-visibility 420ms allow-discrete;
+  }
+
+  .classification-item[open]::details-content {
+    block-size: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .classification-experience {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .classification-feature {
+    grid-row: 1;
+    min-height: 340px;
+  }
+
+  .classification-accordion {
+    grid-row: 2;
+  }
+}
+
+@media (max-width: 560px) {
+  .classification-feature {
+    min-height: 300px;
+  }
+
+  .classification-accordion {
+    gap: 8px;
+    padding: 15px;
+  }
+
+  .classification-item-summary {
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .classification-item-name {
+    font-size: 0.86rem;
+  }
+
+  .classification-item-risk {
+    max-width: 64px;
+    font-size: 0.58rem;
+  }
+
+  .classification-item-content {
+    padding: 0 14px 16px 45px;
+    font-size: 0.82rem;
+  }
+
+  .classification-item-facts > div {
+    grid-template-columns: minmax(78px, 0.65fr) minmax(0, 1.35fr);
+    gap: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .classification-item,
+  .classification-item-icon,
+  .classification-feature {
     transition-duration: 0.01ms;
   }
 }

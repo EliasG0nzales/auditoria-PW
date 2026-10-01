@@ -19,8 +19,8 @@ import Equipo from './sections/Equipo';
 function App() {
   return (
     <div className="App">
-      <Header />
       <Navigation />
+      <Header />
       <main>
         <div id="contexto">
           <Contexto />

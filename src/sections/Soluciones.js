@@ -49,6 +49,9 @@ const Soluciones = () => {
             Diagnóstico y Propuestas de Solución
           </h2>
           <div className="section-line"></div>
+          <p className="section-subtitle">
+            Las propuestas mejoran el consentimiento, controlan el ciclo de vida de los datos y refuerzan la seguridad del sistema de IA.
+          </p>
         </div>
 
         {/* SOLUCIÓN 1 */}
@@ -158,6 +161,9 @@ const Soluciones = () => {
               </div>
             </div>
           </div>
+          <p className="solution-summary">
+            Una interfaz de consentimiento granular, explícito y revocable permite al paciente entender y controlar cada uso de sus datos.
+          </p>
         </div>
 
         {/* SOLUCIÓN 2 */}
@@ -229,6 +235,9 @@ const Soluciones = () => {
               </video>
             </figure>
           </div>
+          <p className="solution-summary">
+            Un ciclo definido de retención, reentrenamiento y purga permite atender revocaciones y demostrar la eliminación de datos.
+          </p>
         </div>
 
         {/* SOLUCIÓN 3 */}
@@ -323,6 +332,9 @@ const Soluciones = () => {
               </div>
             </div>
           </div>
+          <p className="solution-summary">
+            El cifrado, la seudonimización y el acceso mínimo reducen la exposición frente a usos o accesos no autorizados.
+          </p>
         </div>
       </div>
     </section>

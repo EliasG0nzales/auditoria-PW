@@ -19,6 +19,9 @@ const DPO = () => {
             Responsable de Protección de Datos Personales
           </h2>
           <div className="section-line"></div>
+          <p className="section-subtitle dpo-summary">
+            El DPO vela por el cumplimiento legal, fortalece la privacidad técnica y coordina con los equipos para proteger los datos durante todo su ciclo de vida.
+          </p>
         </div>
 
         <div className="dpo-layout">
@@ -38,13 +41,9 @@ const DPO = () => {
                 </span>
                 Funciones Legales
               </h3>
-              <ul>
-                <li>Supervisar el cumplimiento de la Ley 29733 y su Reglamento</li>
-                <li>Gestionar las solicitudes de derechos ARCO de los pacientes</li>
-                <li>Evaluar los análisis de impacto en protección de datos personales</li>
-                <li>Ser punto de contacto con la autoridad de protección de datos</li>
-                <li>Asesorar sobre bases legales para el tratamiento</li>
-              </ul>
+              <p className="dpo-card-summary">
+                Asegura el cumplimiento normativo, asesora sobre el tratamiento de datos y atiende los derechos de los pacientes.
+              </p>
             </div>
 
             <div className="dpo-card">
@@ -54,13 +53,9 @@ const DPO = () => {
                 </span>
                 Funciones Técnicas
               </h3>
-              <ul>
-                <li>Auditar el pipeline de ML para verificar Privacy by Design</li>
-                <li>Validar las técnicas de anonimización/seudonimización</li>
-                <li>Revisar controles RBAC y políticas de acceso</li>
-                <li>Supervisar el cifrado en tránsito y en reposo</li>
-                <li>Coordinar procesos de Machine Unlearning</li>
-              </ul>
+              <p className="dpo-card-summary">
+                Comprueba que los sistemas protejan los datos mediante anonimización, controles de acceso y cifrado.
+              </p>
             </div>
 
             <div className="dpo-card">
@@ -70,13 +65,9 @@ const DPO = () => {
                 </span>
                 Coordinación con Data Engineering y MLOps
               </h3>
-              <ul>
-                <li>Participar en reviews de diseño del pipeline de datos</li>
-                <li>Definir políticas de retención conjuntas con el equipo</li>
-                <li>Establecer checklists de compliance en el CI/CD</li>
-                <li>Implementar alertas automáticas ante accesos anómalos</li>
-                <li>Documentar el linaje de datos para trazabilidad</li>
-              </ul>
+              <p className="dpo-card-summary">
+                Coordina con Data Engineering y MLOps la retención, trazabilidad y aplicación de controles de privacidad.
+              </p>
             </div>
           </div>
         </div>

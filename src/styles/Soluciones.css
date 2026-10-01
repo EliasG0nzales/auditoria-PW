@@ -23,6 +23,14 @@
   font-size: 1.2rem;
 }
 
+.solution-summary {
+  margin: 0;
+  padding: 14px 30px 18px;
+  color: #526271;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
 .solution-content-grid {
   display: grid;
   grid-template-columns: 1fr 2fr;

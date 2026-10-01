@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { animate } from 'animejs';
 import {
   FaFileLines,
   FaChartColumn,
@@ -15,6 +16,109 @@ const Flujos = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [governanceZoom, setGovernanceZoom] = useState(1);
   const [isGovernanceFullscreen, setIsGovernanceFullscreen] = useState(false);
+  const [selectedConsentStep, setSelectedConsentStep] = useState(0);
+  const [selectedGovernanceStep, setSelectedGovernanceStep] = useState(0);
+  const [lastSelectedDiagram, setLastSelectedDiagram] = useState(null);
+
+  useEffect(() => {
+    if (!lastSelectedDiagram || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+
+    const diagramSelector = `[data-diagram="${lastSelectedDiagram}"]`;
+    const selectedIndicators = document.querySelectorAll(
+      `${diagramSelector} .diagram-hotspot.is-selected span`
+    );
+    const selectedPanels = document.querySelectorAll(
+      `${diagramSelector}.diagram-selected-step`
+    );
+
+    animate(selectedIndicators, {
+      scale: [0.75, 1.2, 1],
+      duration: 420,
+      ease: 'out(3)',
+    });
+    animate(selectedPanels, {
+      opacity: [0, 1],
+      translateY: [9, 0],
+      duration: 300,
+      ease: 'out(3)',
+    });
+  }, [lastSelectedDiagram, selectedConsentStep, selectedGovernanceStep]);
+
+  const selectConsentStep = (index) => {
+    setSelectedConsentStep(index);
+    setLastSelectedDiagram('consent');
+  };
+
+  const selectGovernanceStep = (index) => {
+    setSelectedGovernanceStep(index);
+    setLastSelectedDiagram('governance');
+  };
+
+  const consentSteps = [
+    { title: 'Informar al paciente', description: 'Se explican con claridad los datos que se recogerán, el propósito del tratamiento y los derechos del paciente.', x: 6.2, y: 50, width: 4.4, height: 18 },
+    { title: 'Solicitar consentimiento', description: 'El paciente expresa su autorización de forma explícita, libre e informada antes de utilizar sus datos.', x: 10.1, y: 50, width: 4.4, height: 18 },
+    { title: 'Registrar la decisión', description: 'La organización registra la autorización y las condiciones aceptadas para demostrar que el uso está permitido.', x: 14.1, y: 50, width: 4.4, height: 18 },
+    { title: 'Verificar la autorización', description: 'Se comprueba si el paciente acepta. Si no autoriza el uso, sus datos no pasan al procesamiento previsto.', x: 18.4, y: 50, width: 4.4, height: 18 },
+    { title: 'Preparar y proteger los datos', description: 'Los datos autorizados se recopilan, minimizan y protegen antes de incorporarlos al flujo de análisis.', x: 28.8, y: 50, width: 4.4, height: 18 },
+    { title: 'Usar los datos en el modelo', description: 'El conjunto protegido se utiliza para entrenar o ejecutar el modelo y producir una predicción.', x: 42, y: 50, width: 4.4, height: 18 },
+    { title: 'Atender una solicitud del paciente', description: 'Si el paciente retira su consentimiento o ejerce sus derechos, se localizan sus datos en los sistemas.', x: 62, y: 50, width: 4.4, height: 18 },
+    { title: 'Eliminar o actualizar los datos', description: 'Se eliminan los registros correspondientes y se evalúa si también deben actualizarse los datos de entrenamiento o el modelo.', x: 71, y: 50, width: 4.4, height: 18 },
+    { title: 'Confirmar el cierre del proceso', description: 'La organización verifica que la solicitud se haya completado y deja constancia de las acciones realizadas.', x: 84, y: 50, width: 4.4, height: 18 },
+  ];
+
+  const governanceSteps = [
+    { title: 'Iniciar el tratamiento', description: 'Se define el propósito y se incorporan únicamente fuentes de datos necesarias para el sistema.', x: 16, y: 5, width: 26, height: 3 },
+    { title: 'Recibir las fuentes de datos', description: 'La información clínica, de wearables y otras fuentes ingresa mediante conexiones seguras y con autenticación.', x: 16, y: 11, width: 26, height: 3 },
+    { title: 'Clasificar los datos', description: 'Se identifican los datos personales, de salud y biométricos para determinar su sensibilidad y nivel de riesgo.', x: 16, y: 17, width: 26, height: 3 },
+    { title: 'Minimizar y seudonimizar', description: 'Se reducen los datos a lo necesario y se separan los identificadores directos para limitar la reidentificación.', x: 16, y: 23, width: 26, height: 3 },
+    { title: 'Aplicar controles de acceso', description: 'El acceso basado en roles permite que cada persona consulte únicamente la información necesaria para su trabajo.', x: 16, y: 29, width: 26, height: 3 },
+    { title: 'Proteger y almacenar', description: 'Los datos se cifran en tránsito y en reposo, y se conservan en entornos con acceso controlado.', x: 16, y: 35, width: 26, height: 3 },
+    { title: 'Entrenar y validar el modelo', description: 'El modelo se desarrolla y valida utilizando datos protegidos y controles de privacidad incorporados al proceso.', x: 16, y: 42, width: 26, height: 3 },
+    { title: 'Desplegar el sistema', description: 'Antes de su uso, se revisan los riesgos, las autorizaciones y las medidas de seguridad del modelo.', x: 16, y: 50, width: 26, height: 3 },
+    { title: 'Monitorear y auditar', description: 'Se registran accesos y actividad para detectar anomalías, revisar el cumplimiento y responder a incidentes.', x: 16, y: 58, width: 26, height: 3 },
+    { title: 'Gestionar cambios y solicitudes', description: 'Las solicitudes de derechos y los cambios en el tratamiento activan las tareas de revisión, actualización o eliminación pertinentes.', x: 35, y: 66, width: 28, height: 3 },
+    { title: 'Retener o eliminar', description: 'Al concluir el periodo de conservación o cuando corresponda, los datos se purgan de forma controlada.', x: 16, y: 94, width: 26, height: 3 },
+  ];
+
+  const interactiveDiagram = (src, alt, diagramName, scale, steps, selectedIndex, onSelect) => (
+    <>
+      <div className="diagram-image-viewport">
+        <div
+          className="diagram-hotspot-stage"
+          data-diagram={diagramName}
+          style={{ width: `${scale * 100}%` }}
+        >
+          <img className="consent-diagram-image" src={src} alt={alt} />
+          {steps.map((step, index) => (
+            <button
+              className={`diagram-hotspot${selectedIndex === index ? ' is-selected' : ''}`}
+              key={step.title}
+              type="button"
+              style={{
+                left: `${step.x}%`,
+                top: `${step.y}%`,
+                width: `${step.width}%`,
+                height: `${step.height}%`,
+              }}
+              onClick={() => onSelect(index)}
+              aria-label={`Paso ${index + 1}: ${step.title}`}
+              aria-pressed={selectedIndex === index}
+              title={step.title}
+            >
+              <span>{index + 1}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="diagram-selected-step" data-diagram={diagramName} aria-live="polite">
+        <span className="diagram-selected-step-number">PASO {String(selectedIndex + 1).padStart(2, '0')}</span>
+        <div>
+          <h4>{steps[selectedIndex].title}</h4>
+          <p>{steps[selectedIndex].description}</p>
+        </div>
+      </div>
+    </>
+  );
 
   const changeZoom = (amount) => {
     setZoom((currentZoom) => Math.min(3, Math.max(1, currentZoom + amount)));
@@ -91,22 +195,17 @@ const Flujos = () => {
           </h3>
           <div className="consent-content-frame">
             {imageControls()}
-            <div className="diagram-image-viewport">
-              <img
-                className="consent-diagram-image"
-                src="/Diagrama%20en%20blanco%20-%20P%C3%A1gina%201%20Gr%C3%A1fico%201_%20Consentimiento%20y%20ciclo%20de%20vida%20del%20dato.png"
-                alt="Diagrama del consentimiento informado y el ciclo de vida de los datos del paciente"
-                style={{ width: `${zoom * 100}%` }}
-              />
-            </div>
+            {interactiveDiagram(
+              '/Diagrama%20en%20blanco%20-%20P%C3%A1gina%201%20Gr%C3%A1fico%201_%20Consentimiento%20y%20ciclo%20de%20vida%20del%20dato.png',
+              'Diagrama interactivo del consentimiento informado y el ciclo de vida de los datos',
+              'consent',
+              zoom,
+              consentSteps,
+              selectedConsentStep,
+              selectConsentStep
+            )}
             <p className="diagram-description">
-              En este primer diagrama mostramos qué pasa con los datos del paciente desde el momento en que se solicita su consentimiento hasta que puede retirar ese consentimiento o pedir que se eliminen sus datos.
-              <br /><br />
-              Primero, el paciente recibe información clara sobre qué datos se van a utilizar y para qué se van a utilizar. Después se solicita un consentimiento explícito, es decir, que el usuario realmente marque la opción y no que venga seleccionada por defecto.
-              <br /><br />
-              Si el paciente acepta, se pueden recopilar los datos necesarios, por ejemplo, su información clínica, datos de los wearables, hábitos y ubicación. Luego estos datos pasan por un proceso de protección y preparación antes de utilizarse en el modelo de inteligencia artificial.
-              <br /><br />
-              Finalmente, el modelo utiliza estos datos para generar una predicción. Pero el proceso no termina ahí. Si el paciente posteriormente retira su consentimiento o solicita la eliminación de sus datos, la organización tiene que identificar dónde se encuentran esos datos, eliminarlos o aplicar las medidas correspondientes y evaluar si también es necesario actualizar los conjuntos de entrenamiento o el modelo.
+              Resume el ciclo del consentimiento informado: desde la autorización del paciente y el uso protegido de sus datos hasta la atención de solicitudes de retiro o eliminación.
             </p>
           </div>
         </div>
@@ -121,14 +220,15 @@ const Flujos = () => {
           >
             <div className="diagram-fullscreen-content" onClick={(event) => event.stopPropagation()}>
               {imageControls(true)}
-              <div className="diagram-fullscreen-viewport">
-                <img
-                  className="consent-diagram-image"
-                  src="/Diagrama%20en%20blanco%20-%20P%C3%A1gina%201%20Gr%C3%A1fico%201_%20Consentimiento%20y%20ciclo%20de%20vida%20del%20dato.png"
-                  alt="Diagrama del consentimiento informado y el ciclo de vida de los datos del paciente"
-                  style={{ width: `${zoom * 100}%` }}
-                />
-              </div>
+              {interactiveDiagram(
+                '/Diagrama%20en%20blanco%20-%20P%C3%A1gina%201%20Gr%C3%A1fico%201_%20Consentimiento%20y%20ciclo%20de%20vida%20del%20dato.png',
+                'Diagrama interactivo del consentimiento informado y el ciclo de vida de los datos',
+                'consent',
+                zoom,
+                consentSteps,
+                selectedConsentStep,
+                selectConsentStep
+              )}
             </div>
           </div>
         )}
@@ -143,32 +243,49 @@ const Flujos = () => {
             Privacy by Design Pipeline
           </h3>
           <div className="consent-content-frame">
-            <button
-              className="governance-image-trigger"
-              type="button"
-              onClick={() => {
-                setGovernanceZoom(1);
-                setIsGovernanceFullscreen(true);
-              }}
-              aria-label="Ampliar diagrama de Privacy by Design y Data Governance"
-              title="Pulsa para ampliar"
-            >
-              <img
-                className="consent-diagram-image"
-                src="/Diagrama%20en%20blanco%20-%20P%C3%A1gina%201%20Privacy%20by%20Design%20%2B%20Data%20Governance.png"
-                alt="Diagrama de arquitectura Privacy by Design y gobernanza de datos"
-              />
-            </button>
+            <div className="diagram-image-controls" aria-label="Controles de imagen">
+              <button
+                type="button"
+                onClick={() => changeGovernanceZoom(-0.25)}
+                disabled={governanceZoom <= 1}
+                aria-label="Alejar imagen"
+                title="Alejar"
+              >
+                <FaMagnifyingGlassMinus />
+              </button>
+              <span aria-live="polite">{Math.round(governanceZoom * 100)}%</span>
+              <button
+                type="button"
+                onClick={() => changeGovernanceZoom(0.25)}
+                disabled={governanceZoom >= 3}
+                aria-label="Acercar imagen"
+                title="Acercar"
+              >
+                <FaMagnifyingGlassPlus />
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setGovernanceZoom(1);
+                  setIsGovernanceFullscreen(true);
+                }}
+                aria-label="Ampliar diagrama"
+                title="Pantalla completa"
+              >
+                <FaExpand />
+              </button>
+            </div>
+            {interactiveDiagram(
+              '/Diagrama%20en%20blanco%20-%20P%C3%A1gina%201%20Privacy%20by%20Design%20%2B%20Data%20Governance.png',
+              'Diagrama interactivo de arquitectura Privacy by Design y gobernanza de datos',
+              'governance',
+              governanceZoom,
+              governanceSteps,
+              selectedGovernanceStep,
+              selectGovernanceStep
+            )}
             <p className="diagram-description">
-              En el segundo diagrama ya nos enfocamos más en la parte técnica. Aquí mostramos cómo proteger los datos durante todo el pipeline de inteligencia artificial.
-              <br /><br />
-              Primero tenemos las diferentes fuentes de información, como los centros de salud, los wearables, las encuestas y los registros públicos. Cuando los datos ingresan al sistema, deben hacerlo mediante una conexión segura y con mecanismos de autenticación.
-              <br /><br />
-              Después clasificamos los datos para saber cuáles son personales, cuáles están relacionados con la salud, cuáles son biométricos y cuáles pueden representar un mayor riesgo. Luego aplicamos minimización y pseudonimización, de manera que los equipos que trabajan con el modelo no tengan acceso innecesario a identificadores directos como el nombre o el DNI.
-              <br /><br />
-              También utilizamos cifrado para proteger los datos cuando se almacenan y cuando se transmiten. Además, aplicamos RBAC, que significa control de acceso basado en roles, para que cada trabajador solamente pueda acceder a la información que necesita para realizar su función.
-              <br /><br />
-              Finalmente, después del entrenamiento y despliegue del modelo, mantenemos monitoreo, auditoría y una política de conservación. Cuando los datos ya no son necesarios o corresponde eliminarlos, se ejecuta el proceso de purga.
+              Resume las salvaguardas del pipeline de IA: clasificación y minimización de datos, seudonimización, cifrado, acceso por roles y monitoreo hasta su eliminación.
             </p>
           </div>
         </div>
@@ -211,14 +328,15 @@ const Flujos = () => {
                   <FaXmark />
                 </button>
               </div>
-              <div className="diagram-fullscreen-viewport">
-                <img
-                  className="consent-diagram-image"
-                  src="/Diagrama%20en%20blanco%20-%20P%C3%A1gina%201%20Privacy%20by%20Design%20%2B%20Data%20Governance.png"
-                  alt="Diagrama de arquitectura Privacy by Design y gobernanza de datos"
-                  style={{ width: `${governanceZoom * 100}%` }}
-                />
-              </div>
+              {interactiveDiagram(
+                '/Diagrama%20en%20blanco%20-%20P%C3%A1gina%201%20Privacy%20by%20Design%20%2B%20Data%20Governance.png',
+                'Diagrama interactivo de arquitectura Privacy by Design y gobernanza de datos',
+                'governance',
+                governanceZoom,
+                governanceSteps,
+                selectedGovernanceStep,
+                selectGovernanceStep
+              )}
             </div>
           </div>
         )}

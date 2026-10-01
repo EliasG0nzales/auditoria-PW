@@ -47,6 +47,11 @@
   padding: 0;
 }
 
+.dpo-card-summary {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
 .dpo-card li {
   padding: 8px 0;
   padding-left: 25px;
